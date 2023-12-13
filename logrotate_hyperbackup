@@ -1,0 +1,17 @@
+# Version 1.0
+# Based on https://github.com/WAdama/nas_hb_status/blob/master/logrotate.md
+/var/log/synohbkpvfs.log {
+    missingok
+    postrotate
+        /usr/syno/bin/synosystemctl reload syslog-ng || true
+    endscript
+}
+
+/var/packages/HyperBackup/var/log/*.log {
+    missingok
+    #prohibit compression of HyperBackup logs:
+    nocompress
+    postrotate
+        /usr/syno/bin/synosystemctl reload syslog-ng || true
+    endscript
+}
